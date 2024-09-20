@@ -9,3 +9,11 @@
 
 Запустить приложение
 `uvicorn main:app --reload`
+
+`alembic init migrations`
+
+Сделать ревизию для миграцию в БД
+`alembic revision --autogenerate -m "Database creation"`
+
+Запустить миграцию
+`alembic upgrade 25075e23b9b2` - хэш ревизии
