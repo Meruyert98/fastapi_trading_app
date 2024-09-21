@@ -20,6 +20,8 @@
 Запустить миграцию
 `alembic upgrade 25075e23b9b2` - хэш ревизии
 
+`alembic upgrade head`
+
 `pip install fastapi-users[sqlalchemy]`
 
 `pip install asyncpg`
