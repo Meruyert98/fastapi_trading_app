@@ -1,3 +1,5 @@
+# Trading App
+
 Создать окружение
 `python -m venv venv`
 
@@ -17,3 +19,7 @@
 
 Запустить миграцию
 `alembic upgrade 25075e23b9b2` - хэш ревизии
+
+`pip install fastapi-users[sqlalchemy]`
+
+`pip install asyncpg`
