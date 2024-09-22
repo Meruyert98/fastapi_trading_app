@@ -4,3 +4,4 @@ migrations/
 .env
 .vscode/
 .pytest_cache/
+.env-non-dev

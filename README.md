@@ -116,3 +116,7 @@ router = APIRouter(
     dependencies=[Depends(auth_guard_payments)]
 )
 ```
+
+`docker build . -t fastapi_app:latest`
+
+`docker run -d -p 7330:8000 fastapi_app`
