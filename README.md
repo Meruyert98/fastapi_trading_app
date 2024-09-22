@@ -39,3 +39,7 @@ In .env file change smtp_user and smtp_pass
 
 Testing the app
 `pytest test/`
+
+CORS - набор HTTP заголовков, который позвлояют общаться друг с другом.
+
+Middleware - среднее звено, которое обрабатывает запрос с фронта на бэкенд.
