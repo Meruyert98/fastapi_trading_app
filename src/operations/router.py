@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,11 +14,23 @@ router = APIRouter(
 
 @router.get("/")
 async def get_specific_operations(operation_type: str, session: AsyncSession = Depends(get_async_session)):
-    query = select(operation).where(operation.c.type == operation_type)
-    result = await session.execute(query)
-    operations = [dict(row) for row in result.all()]
-    
-    return operations
+    try:
+        query = select(operation).where(operation.c.type == operation_type)
+        result = await session.execute(query)
+
+        operations = result.scalars().all()
+
+        return {"status": "sucess",
+                "data": operations,
+                "details": None }
+    except ZeroDivisionError:
+            raise HTTPException(status_code=500, detail={"status": "error", 
+                    "data": None, 
+                    "details": "You are dividing to zero! Fatal Error"})
+    except:
+        raise HTTPException(status_code=500, detail= {"status": "error", 
+                "data": None, 
+                "details": None})
 
 @router.post("/")
 async def add_specific_operations(new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)):
@@ -26,14 +38,3 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
     await session.execute(stmt)
     await session.commit()
     return {"status": "success"}
-# ORM - Object-relational model
-# SQL Injection
-
-# {
-#   "id": 912345,
-#   "quantity": "1245.34",
-#   "figi": "string",
-#   "instrument_type": "string",
-#   "data": "2024-09-21T12:45:59.765Z",
-#   "type": "Выплата купонов"
-# }
