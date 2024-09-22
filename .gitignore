@@ -1,6 +1,7 @@
-venv/
 __pycache__/
-.idea
-**/venv/
-
-.env-render
+venv/
+migrations/
+.env
+.vscode/
+.pytest_cache/
+.env-non-dev
