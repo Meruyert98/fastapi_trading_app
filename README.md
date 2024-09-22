@@ -33,3 +33,9 @@
 `celery -A src.tasks.tasks:celery flower`
 
 Flower web localhost:5555
+
+Gmail - add 2authentication - app passwords
+In .env file change smtp_user and smtp_pass
+
+Testing the app
+`pytest test/`
