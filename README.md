@@ -25,3 +25,11 @@
 `pip install fastapi-users[sqlalchemy]`
 
 `pip install asyncpg`
+
+Запустить celery
+`celery -A src.tasks.tasks:celery worker --loglevel=INFO --pool=solo`
+
+Запустить flower
+`celery -A src.tasks.tasks:celery flower`
+
+Flower web localhost:5555
