@@ -24,7 +24,7 @@ docker-compose up -d
 python -m venv venv
 ```
 
-Зайти на окружение
+Активация виртуального окружения (Windows)
 
 ```
 .\venv\Scripts\activate
@@ -41,6 +41,8 @@ pip install fastapi[all]
 ```
 uvicorn main:app --reload
 ```
+
+Генерируем миграцию с alembic
 
 ```
 alembic init migrations
