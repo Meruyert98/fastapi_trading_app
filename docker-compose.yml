@@ -3,19 +3,22 @@ services:
   db:
     image: postgres:15
     container_name: db_app
-    ports:
-      - 5435:5432
+    command: -p 1221
+    expose:
+      - 1221
     env_file:
       - .env-non-dev
   redis:
     image: redis:7
     container_name: redis_app
-    ports:
-      - 5370:5370
+    command: --port 5370
+    expose:
+      - 5370
   app:
     build: .
+    image: meruyerts/fastapi_app:latest # Replace with your Docker Hub username and desired image name
     container_name: fastapi_app
-    command: ["/fastapi_app/docker/app.sh"]
+    # command: ["/fastapi_app/docker/app.sh"]
     ports:
       - 9999:8000
     env_file:
@@ -25,6 +28,7 @@ services:
       - redis
   celery:
     build: .
+    image: meruyerts/celery_app:latest
     env_file:
       - .env-non-dev
     container_name: celery_app
@@ -34,6 +38,7 @@ services:
 
   flower:
     build: .
+    image: meruyerts/flower_app:latest
     env_file:
       - .env-non-dev
     container_name: flower_app
