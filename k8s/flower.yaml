@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flower-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flower-app
+  template:
+    metadata:
+      labels:
+        app: flower-app
+    spec:
+      containers:
+        - name: flower-app
+          image: your_fastapi_image:latest # Replace with your FastAPI image
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_PASS
+          command: ["/fastapi_app/docker/celery.sh", "flower"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flower-app
+spec:
+  type: NodePort
+  ports:
+    - port: 5555
+      targetPort: 5555
+      nodePort: 8888
+  selector:
+    app: flower-app
