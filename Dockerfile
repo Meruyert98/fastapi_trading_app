@@ -12,6 +12,11 @@ COPY . .
 
 RUN chmod a+x docker/*.sh
 
+
+# Set the command to run your FastAPI application
+CMD ["/fastapi_app/docker/app.sh"]
+
 # WORKDIR /src
 
 # CMD gunicorn src.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
+
