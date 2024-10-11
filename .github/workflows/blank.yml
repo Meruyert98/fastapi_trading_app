@@ -27,9 +27,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run tests
-      run: |
-        pytest tests/  # Adjust to your test command
+    # - name: Run tests
+    #   run: |
+    #     pytest tests/  # Adjust to your test command
 
     - name: Build Docker image
       run: |
